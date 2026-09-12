@@ -1,0 +1,16 @@
+[workspace]
+channels = ["conda-forge"]
+name = "competition-news-feed"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "3.14.*"
+
+[pypi-dependencies]
+tavily-python = ">=0.8.2, <0.9"
+
+[activation]
+scripts = ["load_env.sh"]
