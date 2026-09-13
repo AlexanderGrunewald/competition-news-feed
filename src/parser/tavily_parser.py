@@ -51,7 +51,7 @@ class CompetitorSearchEngine(TavilyClient):
                 if k in self.VALID_SEARCH_PARAMS and v is not None
             }
             # If start date or end date is specified, the client does not take time_range as an argument
-            if "stat_date" in filtered_kwargs or "end_date" in filtered_kwargs:
+            if "start_date" in filtered_kwargs or "end_date" in filtered_kwargs:
                 del search_payload["time_range"]
 
             search_payload.update(filtered_kwargs)
