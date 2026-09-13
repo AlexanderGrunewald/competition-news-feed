@@ -5,7 +5,7 @@ platforms = ["osx-arm64", "linux-64"]
 version = "0.1.0"
 
 [tasks]
-start = "streamlit run app.py"
+start = "streamlit run src/app/🧑‍💻_News_Feed_Monitor.py"
 
 [dependencies]
 python = "3.14.*"
