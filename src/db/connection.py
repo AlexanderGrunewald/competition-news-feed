@@ -10,7 +10,10 @@ def get_read_connection(**kwargs: Optional[Any]) -> db.DuckDBPyConnection:
 
 def read_feed(conn: db.DuckDBPyConnection, feed_name: str) -> List[dict]:
     query = f"SELECT * FROM feeds WHERE feed_name = '{feed_name}'"
-    result = conn.execute(query).fetch_df()  # Use 'records' to get a list of dicts
+    result = conn.execute(
+        "SELECT * FROM feeds WHERE feed_name = ?",
+        (feed_name,),
+    ).fetch_df()  # Use 'records' to get a list of dicts
     return result.to_dict(orient="records")
 
 def write_feed(
@@ -19,12 +22,10 @@ def write_feed(
     feed_data: List[dict],
 ) -> None:
     required_keys = {
-        "id",
         "competitor",
         "category",
         "query",
-        "extra_params",
-        "created_at",
+        "extra_params"
     }
     
     error_msg = (
@@ -39,17 +40,15 @@ def write_feed(
     feed_tuples = [
         (
             feed_name,
-            item["id"],
             item["competitor"],
             item["category"],
             item["query"],
             item["extra_params"],
-            item["created_at"],
         )
         for item in feed_data
     ]
     conn.executemany(
-        "INSERT INTO feeds (feed_name, id, competitor, category, query, extra_params, created_at) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO feeds (feed_name, competitor, category, query, extra_params) "
+        "VALUES (?, ?, ?, ?, ?,)",
         feed_tuples,
     )

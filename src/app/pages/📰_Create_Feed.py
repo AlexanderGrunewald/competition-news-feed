@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+from src.db.connection import write_feed, get_connection
 
 st.title("Create a news feed...")
 

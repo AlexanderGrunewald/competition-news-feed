@@ -45,12 +45,10 @@ def test_get_read_connection_rejects_writes(temp_db):
 def test_write_feed_then_read_feed_round_trip(temp_db):
     feed_data = [
         {
-            "id": 1,
             "competitor": "Makita",
             "category": "accessories",
             "query": '"Makita" new power tool accessories',
             "extra_params": "{}",
-            "created_at": "2026-01-01 00:00:00",
         }
     ]
 
