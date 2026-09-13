@@ -2,7 +2,7 @@ from pathlib import Path
 from streamlit.testing.v1 import AppTest
 
 # Resolve the root app.py relative to tests/test_app.py
-APP_PATH = Path(__file__).parent.parent / "app.py"
+APP_PATH = Path(__file__).parent.parent / "src" / "app" / "app.py"
 
 
 def test_app_smoke_test():
