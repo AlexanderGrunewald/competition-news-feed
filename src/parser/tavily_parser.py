@@ -64,10 +64,10 @@ class CompetitorSearchEngine(TavilyClient):
         with open(f"{filename}_{todays_date}", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
 
+if __name__ == "__main__":
+    # Usage:
+    engine = CompetitorSearchEngine()
+    results = engine.monitor_competitor("Makita", category="accessories")
 
-# Usage:
-engine = CompetitorSearchEngine()
-results = engine.monitor_competitor("Makita", category="accessories")
-
-print(f"Results found: {len(results.get('results', []))}")
-engine.save_results(results, "makita_accessories.json")
+    print(f"Results found: {len(results.get('results', []))}")
+    engine.save_results(results, "makita_accessories.json")
