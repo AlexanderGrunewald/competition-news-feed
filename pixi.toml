@@ -5,13 +5,16 @@ platforms = ["osx-arm64", "linux-64"]
 version = "0.1.0"
 
 [tasks]
-start = "streamlit run src/app/🧑‍💻_News_Feed_Monitor.py"
+init-db = "duckdb data/database/newsFeed.duckdb < src/db/schema.sql"
+start = { cmd = "streamlit run src/app/🧑‍💻_News_Feed_Monitor.py", depends-on = ["init-db"] }
 
 [dependencies]
 python = "3.14.*"
 rich = ">=15.0.0,<16"
 streamlit = ">=1.63.0,<2"
 pandas = ">=3.0.5,<4"
+duckdb = ">=1.5.5,<2"
+duckdb-cli = ">=1.5.5,<2"
 
 [pypi-dependencies]
 tavily-python = ">=0.8.2, <0.9"
