@@ -22,6 +22,7 @@ def write_feed(
     feed_data: List[dict],
 ) -> None:
     required_keys = {
+        "feed_name",
         "competitor",
         "category",
         "query",
@@ -30,8 +31,8 @@ def write_feed(
     
     error_msg = (
         "Each feed item must contain: "
-        "'id', 'competitor', 'category', "
-        "'query', 'extra_params', and 'created_at'."
+        "'feed_name', 'competitor', 'category', "
+        "'query', and 'extra_params'."
     )
 
     if not all(required_keys.issubset(item) for item in feed_data):

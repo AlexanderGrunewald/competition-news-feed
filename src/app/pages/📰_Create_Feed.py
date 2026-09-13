@@ -58,7 +58,10 @@ if st.button("Create Feed", type="primary"):
         "competitor": competitor_name,
         "category": category,
         "custom_query": custom_query or None,
+        "query": custom_query or f'"{competitor_name}" new power tool accessories',
         "extra_params": {k: v for k, v in extra_kwargs.items() if v != ""},
     }
+    with get_connection() as conn:
+        write_feed(conn, feed_name, [payload])
     st.success("Feed configuration ready!")
     st.json(payload)
