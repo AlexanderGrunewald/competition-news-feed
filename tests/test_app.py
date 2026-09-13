@@ -1,20 +1,19 @@
+from pathlib import Path
 from streamlit.testing.v1 import AppTest
+
+# Resolve the root app.py relative to tests/test_app.py
+APP_PATH = Path(__file__).parent.parent / "app.py"
 
 
 def test_app_smoke_test():
-    """Initializes the app and verifies it boots without raising exceptions."""
-    # Replace 'app.py' with your Streamlit entrypoint file
-    at = AppTest.from_file("app.py")
+    """Verify the app initializes and runs without uncaught exceptions."""
+    at = AppTest.from_file(str(APP_PATH))
     at.run()
-
-    # Asserts that no uncaught exceptions occurred during script execution
     assert not at.exception
 
 
 def test_app_title():
-    """Verifies that the main title renders correctly."""
-    at = AppTest.from_file("app.py")
+    """Verify that the primary page title renders."""
+    at = AppTest.from_file(str(APP_PATH))
     at.run()
-
-    # Checks the first rendered title on the page
     assert at.title[0].value == "Competitor News Tracker"
