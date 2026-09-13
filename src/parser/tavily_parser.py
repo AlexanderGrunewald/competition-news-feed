@@ -1,6 +1,7 @@
 import json
 import os
 from tavily import TavilyClient
+from time import time
 
 
 class CompetitorSearchEngine(TavilyClient):
@@ -59,7 +60,8 @@ class CompetitorSearchEngine(TavilyClient):
     
     def save_results(self, data: dict, filename: str = "competitor_intel.json"):
         """Utility to write search results cleanly to disk."""
-        with open(filename, "w", encoding="utf-8") as f:
+        todays_date = time.now().strftime("%Y-%m-%d %H:%M")
+        with open(f"{filename}_{todays_date}", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
 
 
