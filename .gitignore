@@ -222,3 +222,4 @@ __marimo__/
 
 # data outpurs should not be in repo
 data/run_results/*.json
+CLAUDE.MD
