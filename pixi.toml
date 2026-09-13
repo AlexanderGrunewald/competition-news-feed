@@ -8,6 +8,7 @@ version = "0.1.0"
 
 [dependencies]
 python = "3.14.*"
+rich = ">=15.0.0,<16"
 
 [pypi-dependencies]
 tavily-python = ">=0.8.2, <0.9"
