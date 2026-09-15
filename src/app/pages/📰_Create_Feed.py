@@ -1,5 +1,13 @@
+import sys
+from pathlib import Path
+
 import pandas as pd
 import streamlit as st
+
+# Streamlit only adds this script's own directory to sys.path, so the repo
+# root (where the 'src' package lives) must be added manually for pages.
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+
 from src.db.connection import write_feed, get_connection
 
 st.title("Create a news feed...")
