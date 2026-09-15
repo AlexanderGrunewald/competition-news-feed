@@ -1,7 +1,7 @@
 [workspace]
 channels = ["conda-forge"]
 name = "competition-news-feed"
-platforms = ["osx-arm64", "linux-64"]
+platforms = ["osx-arm64", "linux-64", "win-64"]
 version = "0.1.0"
 
 [tasks]
@@ -14,7 +14,16 @@ rich = ">=15.0.0,<16"
 streamlit = ">=1.63.0,<2"
 pandas = ">=3.0.5,<4"
 duckdb = ">=1.5.5,<2"
-duckdb-cli = ">=1.5.5,<2"
+
+[target.linux-64.dependencies]
+duckdb-cli = "*"
+
+[target.osx-arm64.dependencies]
+duckdb-cli = "*"
+
+[target.win-64.tasks]
+# Uses DuckDB dot-command instead of shell '<' redirection which fails on Windows cmd/powershell
+init-db = 'duckdb data/database/newsFeed.duckdb ".read src/db/schema.sql"'
 
 [pypi-dependencies]
 tavily-python = ">=0.8.2, <0.9"
@@ -30,5 +39,8 @@ test = "pytest"
 [environments]
 default = ["test"]
 
-[activation]
+[target.linux-64.activation]
+scripts = ["load_env.sh"]
+
+[target.osx-arm64.activation]
 scripts = ["load_env.sh"]
